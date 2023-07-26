@@ -1,0 +1,22 @@
+<th:block th:fragment="itemRow">
+    <div th:id="'itemRow_' + ${itemId}" th:item_id="${itemId}" class="row-item">
+        <div class="row-item-id item-selector-id" th:utext="${itemId}"></div>
+        <div class="row-item-info">
+            <div class="row-title">
+                <input type="text" class="item-selector-title" th:placeholder="#{enter-title}" th:value="*{title}"
+                       onchange="onChangeText(this)" required/>
+                <button class="row-details-button item-selector-button-details" onclick="showItemDetails(this)"
+                        th:utext="#{item-details}">Details
+                </button>
+            </div>
+            <div class="row-actions">
+                <button class="row-save-button item-selector-button-save" onclick="saveItem(this)"
+                        th:utext="#{save-item}" disabled>Save
+                </button>
+                <button class="row-delete-button item-selector-button-delete" onclick="deleteItem(this)"
+                        th:utext="#{delete-item}">Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</th:block>
