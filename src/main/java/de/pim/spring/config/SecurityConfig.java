@@ -17,7 +17,6 @@ import org.springframework.security.config.annotation.web.configurers.SessionMan
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -90,19 +89,14 @@ public class SecurityConfig {
 
         return (supplier, context) -> {
 
-            Authentication authentication0 = SecurityContextHolder.getContext().getAuthentication();
             Authentication authentication = supplier.get();
             HttpServletRequest httpServletRequest = context.getRequest();
             String method = httpServletRequest.getMethod();
 
             // Only "Admin" allowed to delete something.
-            // Only "Admin" and "User" allowed to put/post something.
-            // "User" allowed to put/post only.
             AuthorizationDecision decision;
             if ("DELETE".equals(method)) {
                 decision = new AuthorizationDecision(containsAnyRole(authentication, ROLE_ADMIN));
-            } else if ("PUT".equals(method) || "POST".equals(method)) {
-                decision = new AuthorizationDecision(containsAnyRole(authentication, ROLE_ADMIN, ROLE_USER));
             } else {
                 decision = new AuthorizationDecision(true);
             }

@@ -27,7 +27,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableMethodSecurity(securedEnabled = true)
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class MethodSecurityConfig {
 
     // Setting of using field "class_id_type varchar(255) NOT NULL" in table "acl_schema"

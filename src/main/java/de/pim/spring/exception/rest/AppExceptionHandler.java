@@ -1,7 +1,7 @@
 package de.pim.spring.exception.rest;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import de.pim.spring.component.ModelAndViewPopulator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,12 +24,15 @@ import java.util.NoSuchElementException;
 @ControllerAdvice
 public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @Autowired
-    ModelAndViewPopulator modelAndViewPopulator;
-
     @ExceptionHandler(value = {NoSuchElementException.class})
-    protected ModelAndView handleException(NoSuchElementException exception, HttpServletRequest request) {
-        return modelAndViewPopulator.fillError404(request, new ModelAndView());
+    protected ModelAndView handleException(NoSuchElementException exception, HttpServletRequest request, ModelAndView modelAndView) {
+
+        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+
+        modelAndView.setViewName("error/404");
+        modelAndView.addObject("error", status == null ? "404" : status);
+
+        return modelAndView;
     }
 
     @Override

@@ -26,6 +26,9 @@ public class User {
     @Column(name = "password", nullable = false, unique = false)
     private String password;
 
+    @Transient
+    private boolean encode;
+
     @Column(name = "enabled", nullable = false, unique = false)
     private boolean enabled;
 

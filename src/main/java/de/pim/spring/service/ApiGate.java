@@ -7,6 +7,13 @@ import java.util.Optional;
 
 public interface ApiGate {
 
-    List<Item> getAll();
-    Optional<Item> getById(long id);
+    List<Item> getAllItems();
+
+    Optional<Item> getItemById(long id);
+
+    Item save(Item item);
+
+    void addPermission(String userName, Long itemId);
+
+    void revokePermission(String userName, Long itemId);
 }

@@ -13,8 +13,8 @@
 
     <groupId>de.pim.spring</groupId>
     <artifactId>spring-09-jdbc</artifactId>
-    <version>3.1.0-SNAPSHOT</version>
-    <name>Library Application</name>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>PIM Security Demo</name>
     <description>PIM Security Demo</description>
 
     <properties>

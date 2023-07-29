@@ -10,8 +10,9 @@ services:
     image: postgres:15.3
     container_name: postgres
     environment:
-      POSTGRES_USER: pimsec
-      POSTGRES_PASSWORD: pimsec
+      POSTGRES_DB: pimsecurity
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
     ports:
       - 5432:5432
     healthcheck:
@@ -23,10 +24,10 @@ services:
     depends_on:
       - docker-hoster
   pgadmin:
-    image: dpage/pgadmin4:7.4
+    image: dpage/pgadmin4:7.5
     container_name: pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: oleg.zhuravlev@pirobase-imperia.com
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
       - 8081:80
